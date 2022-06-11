@@ -1,0 +1,2 @@
+Idea per sostituire LoFTR con SIFT:
+1) Creare file dove salvare struttura con corrispondeze 2D-3D. E' possibile che prima sia neccessario un sotto campionamento dell'immagine per poter permettere il calcolo a LoFTR.
