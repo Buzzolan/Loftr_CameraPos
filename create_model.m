@@ -15,17 +15,14 @@ if strcmp(env,'cav')
     T_ref = imgInfo.T;
 else
     imageIndex = '1020';
-     [K_ref, R_ref, T_ref, p2D, p3D] = dante_get_points_loftr('dante/SamPointCloud.ply', ...
-        "dante/testoutput.txt", ...
-        "Zephyr_Dante_Statue_Dataset/_SAM"+imageIndex+".xmp");
-  %{
-comments
+     
+ 
     [K_ref, R_ref, T_ref, p2D, p3D] = dante_get_points('dante/SamPointCloud.ply', ...
          "dante/VisibilityRef"+imageIndex+".txt", ...
         "Zephyr_Dante_Statue_Dataset/_SAM"+imageIndex+".xmp");
     % "dante/VisibilityRef"+imageIndex+".txt"
-         %}
-    refImg = imread("Zephyr_Dante_Statue_Dataset/Sub_SAM"+imageIndex+".JPG");
+         
+    refImg = imread("Zephyr_Dante_Statue_Dataset/_SAM"+imageIndex+".JPG");
     
 end
 
@@ -49,11 +46,11 @@ fprintf('Attached descriptors to %i points\n', length(p2D_ref));
 if strcmp(env,'cav')
     fileName = 'models/refDescriptorsCav.mat';
 else
-    fileName = "models/Sub_refDescriptorsDante_1_"+imageIndex+".mat";
+    fileName = "models/refDescriptorsDante"+imageIndex+".mat";
 end
-%referenceModel = ReferenceModel(refImg, p2D_ref, p3D_ref, K_ref, R_ref, T_ref, f_ref, d_ref);
-sub_referenceModel= ReferenceModel(refImg,p2D_ref, p3D_ref, K_ref, R_ref, T_ref,f_ref,d_ref);
-save(fileName, 'sub_referenceModel');
+referenceModel = ReferenceModel(refImg, p2D_ref, p3D_ref, K_ref, R_ref, T_ref, f_ref, d_ref);
+
+save(fileName, 'referenceModel');
 fprintf('Saved model in %s\n', fileName);
 
 
@@ -62,5 +59,5 @@ axis on
 hold on;
 % Plot cross at row 100, column 50
 for i=1:length(p2D_ref)
-    plot(p2D_ref(i,2),length(refImg)-p2D_ref(i,1), 'r+', 'MarkerSize', 10, 'LineWidth', 2);
+    plot(p2D_ref(i,1),p2D_ref(i,2), 'r+', 'MarkerSize', 10, 'LineWidth', 2);
 end

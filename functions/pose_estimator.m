@@ -26,6 +26,15 @@ matches = matches(:, perm(1:toPlot));
 p2D_check = fc(1:2,matches(2,:))';%Punti 2D che hanno corrispondenza e con descrittore associato
 p3D_check = model.p3D(matches(1,:),:);%prendo punti 3D dai mie punti 2D con match
 
+figure(123)
+imshow(checkImg)
+axis on
+hold on;
+% Plot cross at row 100, column 50
+for i=1:length(p2D_check)
+    plot(p2D_check(i,1),p2D_check(i,2), 'r+', 'MarkerSize', 10, 'LineWidth', 2);
+end
+
 %% Loftr method
 %INPUT: -devo avere struttura p2D_check nx2 con n= corrispondenze 2D
 %       -struttura p3D_check nx3

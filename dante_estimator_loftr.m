@@ -2,19 +2,20 @@
 clear all
 close all
 addpath 'functions' 'classes';
+
 run('functions/sift/vlfeat-0.9.21-bin/vlfeat-0.9.21/toolbox/vl_setup');
 
 %params
 method = MethodName.Fiore;
-modelFile = 'models/Sub_refDescriptorsDante_1_1020';%load descriptors subsample
+modelFile = 'models/refDescriptorsDante1020';%load descriptors subsample
 load(modelFile); %variable referenceModel
 
 
-for i = 1:3
-checkImageFile = "dante/test/1020/Sub_test_"+num2str(i)+".jpg";
-checkImageFileOriginal = "dante/test/1020/test_"+num2str(i)+".jpg";%per calcolare paramentri interni
+for i = 1:1%intanto testo una sola immagine
+%checkImageFile = "dante/test/1020/Sub_test_"+num2str(i)+".jpg";
+checkImageFile = "dante/test/1020/test_"+num2str(i)+".jpg";%per calcolare paramentri interni
 
-testK = getInternals(checkImageFileOriginal); % estimated internal params of test image
+testK = getInternals(checkImageFile); % estimated internal params of original test image
 [R, T] = pose_estimator_loftr(referenceModel, checkImageFile, method, testK);
 % if i == 1
 %     figure(100)
