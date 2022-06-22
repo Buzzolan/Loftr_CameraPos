@@ -1,7 +1,7 @@
 function [R, T] = pose_estimator_loftr(model,checkImageFile, method, testK)
 disp('Loading test image...');
 checkImg =  imread(checkImageFile);% 2nd Img from a different point of view
-load('Loftr_points.mat')
+load('Loftr_points1019.mat')
 %substitution scale invariant feature transform with LoFTR
 
 %% Sift method
@@ -56,7 +56,7 @@ end
 %%
 save('pose_estimator')
 %% find best model for matched points loftr
-%{
+% %{
 inlier_threshold = floor(length(loftr_2D_check)*0.5);
 numIter = 5000;
 fprintf('Applying ransac with %i iterations and a threshold of %i inliers...\n', ...
@@ -84,11 +84,11 @@ title(strcat('Projection of best model points on test image with ',string(method
 
 R = G(1:3,1:3);
 T = G(1:3, 4);
-%}
 
+% %}
 
 %% find best model for matched points sift
-
+%{
 inlier_threshold = floor(length(p2D_check)*0.5);
 numIter = 5000;
 fprintf('Applying ransac with %i iterations and a threshold of %i inliers...\n', ...
@@ -116,7 +116,7 @@ title(strcat('Projection of best model points on test image with ',string(method
 
 R = G(1:3,1:3);
 T = G(1:3, 4);
-
+%}
 
 end
 

@@ -7,13 +7,13 @@ run('functions/sift/vlfeat-0.9.21-bin/vlfeat-0.9.21/toolbox/vl_setup');
 
 %params
 method = MethodName.Fiore;
-modelFile = 'models/refDescriptorsDante1020';%load descriptors subsample
+modelFile = 'models/refDescriptorsDante1014';%load descriptors subsample
 load(modelFile); %variable referenceModel
 
 
 for i = 1:1%intanto testo una sola immagine
 %checkImageFile = "dante/test/1020/Sub_test_"+num2str(i)+".jpg";
-checkImageFile = "dante/test/1020/test_"+num2str(i)+".jpg";%per calcolare paramentri interni
+checkImageFile = "dante/test/1014/_SAM1019.JPG";%per calcolare paramentri interni
 
 testK = getInternals(checkImageFile); % estimated internal params of original test image
 [R, T] = pose_estimator_loftr(referenceModel, checkImageFile, method, testK);
